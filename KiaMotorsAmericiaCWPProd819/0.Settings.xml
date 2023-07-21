@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="KIA-CWP">
+	
+	<parameter name="category" value="Smoke Testing"></parameter>
+	<parameter name="authors" value="HAEA-KIA"></parameter>
+	
+	 
+ 	<test  name="Settings Update Personal Details"  preserve-order="true">
+  	 <parameter name="browser" value="chrome"></parameter>
+  	 <parameter name="dataSheetName" value="TC000_1"></parameter>
+	 <parameter name="testCaseName" value="Settings Update Personal Details"></parameter>
+	 <parameter name="testDescription" value="Settings Update Personal Details - Smoke Test"></parameter>
+    <classes>
+      <class name="testcases.TC000_Settings">
+		  <methods> 
+			  <include name="personalDetails"></include>
+		  </methods>
+	  </class>      
+    </classes>
+  </test> 
+	
+	 
+		<test  name="Settings Phone Number Verified"  preserve-order="true">
+  	 <parameter name="browser" value="chrome"></parameter>
+  	 <parameter name="dataSheetName" value="TC000_2"></parameter>
+	 <parameter name="testCaseName" value="Settings Phone Number Verified"></parameter>
+	 <parameter name="testDescription" value="Settings Phone Number Verified - Smoke Test"></parameter>
+    <classes>
+      <class name="testcases.TC000_Settings">
+		  <methods> 
+			  <include name="phoneNumberVerified"></include>
+		  </methods>
+	  </class>      
+    </classes>
+  </test> 
+	 
+	<test  name="Settings Change Password"  preserve-order="true">
+  	 <parameter name="browser" value="chrome"></parameter>
+  	 <parameter name="dataSheetName" value="TC000_3"></parameter>
+	 <parameter name="testCaseName" value="Settings Change Password"></parameter>
+	 <parameter name="testDescription" value="Settings Change Password - Smoke Test"></parameter>
+    <classes>
+      <class name="testcases.TC000_Settings">
+		  <methods> 
+			  <include name="settingsChangePassword"></include>
+		  </methods>
+	  </class>      
+    </classes>
+  </test> 
+  
+  
+  
+	<test  name="Settings Update PIN"  preserve-order="true">
+  	 <parameter name="browser" value="chrome"></parameter>
+  	 <parameter name="dataSheetName" value="TC000_4"></parameter>
+	 <parameter name="testCaseName" value="Settings Update PIN"></parameter>
+	 <parameter name="testDescription" value="Settings Update PIN - Smoke Test"></parameter>
+    <classes>
+      <class name="testcases.TC000_Settings">
+		  <methods> 
+			 <include name="settingsUpdatePIN"></include>
+		  </methods>
+	  </class>      
+    </classes>
+  </test>
+  
+  <test  name="Settings Update PIN with password"  preserve-order="true">
+  	 <parameter name="browser" value="chrome"></parameter>
+  	 <parameter name="dataSheetName" value="TC000_5"></parameter>
+	 <parameter name="testCaseName" value="Settings Update PIN with password"></parameter>
+	 <parameter name="testDescription" value="Settings Update PIN with password - Smoke Test"></parameter>
+    <classes>
+      <class name="testcases.TC000_Settings">
+		  <methods> 
+			 <include name="settingsUpdatePINWithPassword"></include>
+		  </methods>
+	  </class>      
+    </classes>
+  </test>
+ 
+  
+  
+  <test  name="Settings CP SMS Toggle"  preserve-order="true">
+  	 <parameter name="browser" value="chrome"></parameter>
+  	 <parameter name="dataSheetName" value="TC000_6"></parameter>
+	 <parameter name="testCaseName" value="Settings CP SMS Toggle"></parameter>
+	 <parameter name="testDescription" value="Settings CP SMS Toggle - Smoke Test"></parameter>
+    <classes>
+      <class name="testcases.TC000_Settings">
+		  <methods> 
+			 <include name="settingsCPEnableToggle"></include>
+		  </methods>
+	  </class>      
+    </classes>
+  </test>
+  
+  
+ <!--  <test  name="Settings CP SMS Toggle"  preserve-order="true">
+  	 <parameter name="browser" value="chrome"></parameter>
+  	 <parameter name="dataSheetName" value="TC000_7"></parameter>
+	 <parameter name="testCaseName" value="Settings Update PIN with password"></parameter>
+	 <parameter name="testDescription" value="Settings Update PIN with password - Smoke Test"></parameter>
+    <classes>
+      <class name="testcases.TC000_Settings">
+		  <methods> 
+			 <include name="settingsCPTurnOffToggle"></include>
+		  </methods>
+	  </class>      
+    </classes>
+  </test>   -->
+   
+  
+  <test  name="Settings Kia Connect Notification Turn Off"  preserve-order="true">
+  	 <parameter name="browser" value="chrome"></parameter>
+  	 <parameter name="dataSheetName" value="TC000_7"></parameter>
+	 <parameter name="testCaseName" value="Settings Kia Connect Notification Turn Off "></parameter>
+	 <parameter name="testDescription" value="Settings Kia Connect Notification Turn Off - Smoke Test"></parameter>
+    <classes>
+      <class name="testcases.TC000_Settings">
+		  <methods> 
+			 <include name="settingsKiaConnectNotificationAlertsTurnOff"></include>
+		  </methods>
+	  </class>      
+    </classes>
+  </test> 
+  
+  <test  name="Settings Kia Connect Notification Turn On"  preserve-order="true">
+  	 <parameter name="browser" value="chrome"></parameter>
+  	 <parameter name="dataSheetName" value="TC000_7"></parameter>
+	 <parameter name="testCaseName" value="Settings Kia Connect Notification Turn On"></parameter>
+	 <parameter name="testDescription" value="Settings Kia Connect Notification Turn On - Smoke Test"></parameter>
+    <classes>
+      <class name="testcases.TC000_Settings">
+		  <methods> 
+			 <include name="settingsKiaConnectNotificationAlertsTurnOn"></include>
+		  </methods>
+	  </class>      
+    </classes>
+  </test> 
+  
+</suite> 
