@@ -1,0 +1,105 @@
+package wrappers;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import java.lang.reflect.Method;
+
+import org.mozilla.javascript.Context;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
+
+import utils.DataInputProvider;
+
+public class KMABase extends GenericWrappers {
+
+	public String browserName;
+	public String dataSheetName;
+
+	@Parameters({ "browser", "testCaseName", "testDescription", "category", "authors" })
+	@BeforeTest
+	public void beforeTest(String browserName, String testCaseName, String testDescription, String category,
+			String authors) {
+		startResult();
+		loadObjects();
+		startTest(testCaseName, testDescription);
+
+	}
+
+	@Parameters({ "browser", "testCaseName", "testDescription", "category", "authors" })
+	@BeforeMethod
+	public void beforeMethod(ITestResult result, String browserName, String testCaseName, String testDescription,
+			String category, String authors) {
+		String testName = result.getTestName();
+		String attribute = (String) result.getAttribute("Description");
+		test = startTestCase(testName, attribute);
+		test.assignCategory(category);
+		test.assignAuthor(authors);
+		invokeApp(browserName);
+	}
+
+	@AfterTest
+	public void afterTest() throws InterruptedException {
+		endTest();
+		unloadObjects();
+		endResult();
+	}
+
+	@AfterMethod
+	public void afterMethod() throws InterruptedException {
+		endTestcase();
+		closeAllBrowsers();
+
+	}
+
+	@DataProvider(name = "fetchData")
+	public Object[][] getData(ITestContext context) {
+		String dataSheetName = context.getCurrentXmlTest().getParameter("dataSheetName");
+		return DataInputProvider.getAllSheetData("./data/" + dataSheetName + ".xlsx");
+	}
+
+	private String getDescription(Method method) {
+		String methodDescription=null;
+		try {
+			Test testAnnotation = method.getAnnotation(Test.class);
+			if (testAnnotation != null) {
+				methodDescription = testAnnotation.description();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return methodDescription;
+	}
+
+	private String getTestName(Method method) {
+		String methodName=null;
+		try {
+			Test testAnnotation = method.getAnnotation(Test.class);
+			if (testAnnotation != null) {
+				methodName = testAnnotation.testName();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return methodName;
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	 
+       
+
+}

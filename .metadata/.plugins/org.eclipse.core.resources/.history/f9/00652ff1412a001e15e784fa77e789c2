@@ -1,0 +1,29 @@
+package testcases;
+
+import org.testng.annotations.Test;
+
+import pages.P2_Login;
+import wrappers.KMABase;
+
+public class TC002_Login extends KMABase {
+
+	
+	@Test(priority=1,description ="This step is to validate verify Sign In page is displayed",testName = "Verify SignIn Is Displayed")
+	public void verifySignInIsDisplayed() {
+		new P2_Login(driver, test)
+		.clickSignIn();
+	}
+	
+	
+//	@Description("This step is to validate verify Login In Functionality")
+//	@TestDescription("Verify Login")
+	@Test(priority=2, dataProvider="fetchData",description ="Verify LoginIn",testName = "This step is to validate Login In page Functionality" )
+	public void verifyLoginIn(String emailId, String pwdLogin) throws InterruptedException{
+	System.out.println(emailId);
+	new P2_Login(driver, test)
+	.clickSignIn()
+	.enterLoginEmailId(emailId)
+	.enterLoginPassword(pwdLogin)
+	.clkSignIn();	
+	}	
+}

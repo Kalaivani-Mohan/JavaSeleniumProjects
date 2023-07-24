@@ -1,0 +1,86 @@
+package wrappers;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+import org.mozilla.javascript.Context;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
+
+import utils.DataInputProvider;
+
+public class KMABase extends GenericWrappers {
+	
+	public String browserName;
+	public String dataSheetName;	
+
+	@Parameters({"browser","testCaseName", "testDescription", "category", "authors"})
+	@BeforeTest
+	public void beforeTest(String browserName, String testCaseName, String testDescription, String category, String authors){
+		startResult();   
+		loadObjects(); 
+		startTest(testCaseName, testDescription);
+
+	}
+	
+	
+	@Parameters({"browser","testCaseName", "testDescription", "category", "authors"})
+	@BeforeMethod
+	public void beforeMethod(ITestResult result, String browserName, String testCaseName, String testDescription, String category, String authors) {
+		test = startTestCase(pascalCaseToNormalCase(result.getMethod().getMethodName()), testDescription);
+		test.assignCategory(category);
+		test.assignAuthor(authors);   
+		invokeApp(browserName);
+	}
+
+	@AfterTest
+	public void afterTest() throws InterruptedException{
+		endTest();
+		unloadObjects();  
+		endResult();
+	}
+	
+	
+	@AfterMethod
+	public void afterMethod() throws InterruptedException{
+		endTestcase(); 
+		closeAllBrowsers();
+	
+		}
+	
+	@DataProvider(name="fetchData")	
+	public Object[][] getData(ITestContext context){
+		String dataSheetName = context.getCurrentXmlTest().getParameter("dataSheetName");
+		return DataInputProvider.getAllSheetData("./data/"+dataSheetName+".xlsx");		
+	}	
+	public static String pascalCaseToNormalCase(String methodName) {
+        if (methodName == null || methodName.isEmpty()) {
+            return "";
+        }
+        String[] words = methodName.split("(?=[A-Z])");
+        for (int i = 1; i < words.length; i++) {
+            words[i] = words[i].toLowerCase();
+        }
+        words[0] = capitalizeFirstLetter(words[0]);
+        return String.join(" ", words);
+    }
+
+    private static String capitalizeFirstLetter(String word) {
+        if (word == null || word.isEmpty()) {
+            return "";
+        }
+        return Character.toUpperCase(word.charAt(0)) + word.substring(1);
+    }
+}
+
+
+
+
+
+
